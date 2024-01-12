@@ -1,657 +1,557 @@
-/* ********************************************************************************************
- *                                                                                            *
- * Please read the following tutorial before implementing tasks:                               *
- * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array     *
- *                                                                                            *
- * NOTE : Please do not use loops! All tasks can be implemented using standard Array methods  *
- *                                                                                            *
- ******************************************************************************************** */
+/* *******************************************************************************************
+ *                                                                                           *
+ * Please read the following tutorial before implementing tasks:                             *
+ * https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Building_blocks/Looping_code    *
+ * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Loops_and_iteration         *
+ * https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Building_blocks/conditionals    *
+ * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/if...else    *
+ * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/switch       *
+ *                                                                                           *
+ ******************************************************************************************* */
 
 /**
- * Creates an array of integers from the specified start to end (inclusive).
+ * Determines whether a given number is positive. Zero is considered positive.
+ * This function does not use Number or Math class methods.
  *
- * @param {number} start - The first number of an array.
- * @param {number} end - The last number of an array.
- * @return {array} - An array of integers.
+ * @param {number} number - The number to check.
+ * @return {boolean} True if the number is positive or zero, false otherwise.
  *
- * @example
- *    getIntervalArray(1, 5)  => [ 1, 2, 3, 4, 5 ]
- *    getIntervalArray(-2, 2)  => [ -2, -1, 0, 1, 2 ]
- *    getIntervalArray(0, 100) => [ 0, 1, 2, ..., 100 ]
- *    getIntervalArray(3, 3) => [ 3 ]
+ * @example:
+ *  10 => true
+ *  0  => true
+ *  -5 => false
  */
-function getIntervalArray(start, end) {
-  return Array.from({ length: end - start + 1 }, (_, index) => start + index);
+function isPositive(number) {
+  return number % 2 === 0;
 }
 
 /**
- * Returns a new array where each element is the sum of the corresponding elements
- * from two arrays. Arrays can have different lengths.
+ * Returns the maximum of three numbers without using Array and Math classes methods.
  *
- * @param {array} arr1 - The first array.
- * @param {array} arr2 - The second array.
- * @return {array} - An array containing the sum of corresponding elements.
+ * @param {number} a - The first number.
+ * @param {number} b - The second number.
+ * @param {number} c - The third number.
+ * @return {number} The maximum of the three numbers.
  *
- * @example
- *    sumArrays([1, 2, 3], [4, 5, 6]) => [5, 7, 9]
- *    sumArrays([10, 20, 30], [5, 10, 15]) => [15, 30, 45]
- *    sumArrays([-1, 0, 1], [1, 2, 3, 4]) => [0, 2, 4, 4]
+ * @example:
+ *  1, 2, 3       => 3
+ *  -5, 0, 5      => 5
+ *  -0.1, 0, 0.2  => 0.2
  */
-function sumArrays(arr1, arr2) {
-  const maxLength = Math.max(arr1.length, arr2.length);
-  return Array.from({ length: maxLength }, (_, index) => {
-    const tempValue1 = index < arr1.length ? arr1[index] : 0;
-    const tempValue2 = index < arr2.length ? arr2[index] : 0;
-    return tempValue1 + tempValue2;
-  });
-}
-
-/**
- * Returns an index of the specified element in array or -1 if element is not found.
- *
- * @param {array} arr - The input array.
- * @param {any} value - Element to search.
- * @return {number} - An index of the specified element.
- *
- * @example
- *    findElement(['Ace', 10, true], 10) => 1
- *    findElement(['Array', 'Number', 'string'], 'Date') => -1
- *    findElement([0, 1, 2, 3, 4, 5], 5) => 5
- */
-function findElement(arr, value) {
-  return arr.indexOf(value);
-}
-
-/**
- * Returns a number of all occurrences of the specified item in an array.
- *
- * @param {array} arr - The input array.
- * @param {any} item - Element to search.
- * @return {number} - Number of found items.
- *
- * @example
- *    findAllOccurrences([ 0, 0, 1, 1, 1, 2 ], 1) => 3
- *    findAllOccurrences([ 1, 2, 3, 4, 5 ], 0) => 0
- *    findAllOccurrences([ 'a','b','c','c' ], 'c') => 2
- *    findAllOccurrences([ null, undefined, null ], null) => 2
- *    findAllOccurrences([ true, 0, 1, 'true' ], true) => 1
- */
-function findAllOccurrences(arr, item) {
-  return arr.reduce((count, el) => (el === item ? count + 1 : count), 0);
-}
-
-/**
- * Removes falsy values from the specified array.
- * Falsy values: false, null, 0, "", undefined, and NaN.
- *
- * @param {array} arr - The input array.
- * @return {array} - The array without falsy values.
- *
- * @example
- *    removeFalsyValues([ 0, false, 'cat', NaN, true, '' ]) => [ 'cat', true ]
- *    removeFalsyValues([ 1, 2, 3, 4, 5, 'false' ]) => [ 1, 2, 3, 4, 5, 'false' ]
- *    removeFalsyValues([ false, 0, NaN, '', undefined ]) => [ ]
- */
-function removeFalsyValues(arr) {
-  return arr.filter(Boolean);
-}
-
-/**
- * Returns an array containing the lengths of each string in a specified array of strings.
- *
- * @param {array} arr - The input array.
- * @return {array} - The array of string lengths.
- *
- * @example
- *    getStringsLength([ '', 'a', 'bc', 'def', 'ghij' ]) => [ 0, 1, 2, 3, 4 ]
- *    getStringsLength([ 'angular', 'react', 'ember' ]) => [ 7, 5, 5 ]
- */
-function getStringsLength(arr) {
-  const map = arr.map((x) => x.length);
-  return map;
-}
-
-/**
- * Returns the average of all items in the specified array of numbers.
- * The result should be rounded to two decimal places.
- *
- * @param {array} arr - The input array
- * @return {number} - The average of all items
- *
- * @example
- *   getAverage([]) => 0
- *   getAverage([ 1, 2, 3 ]) => 2
- *   getAverage([ -1, 1, -1, 1 ]) => 0
- *   getAverage([ 1, 10, 100, 1000 ])  => 277,75
- *   getAverage([ 2, 3, 3 ])  => 2,67
- */
-function getAverage(arr) {
-  if (arr.length === 0) {
-    return 0;
+function getMaxNumber(a, b, c) {
+  if (a > b && a > c) {
+    return a;
   }
-  const sum = arr.reduce((acc, num) => acc + num, 0);
-  const average = sum / arr.length;
-  return Math.round(average * 100) / 100;
-}
-
-/**
- * Checks if all strings in an array have the same length.
- *
- * @param {array} arr - The array of strings to be checked.
- * @return {boolean} - True if all strings have the same length, false otherwise.
- *
- * @example
- *    isSameLength(['orange', 'banana', 'cherry']) => true
- *    isSameLength(['cat', 'dog', 'elephant']) => false
- */
-function isSameLength(arr) {
-  const result = arr.every((x) => x.length === arr[0].length);
-  return result;
-}
-
-/**
- * Checks if there are elements in the array where the value is equal to its index.
- *
- * @param {array} arr - The array of elements to be checked.
- * @return {boolean} - True if there are elements with value equal to their index, false otherwise.
- *
- * @example
- *    isValueEqualsIndex([0, 1, 2, 3, 4]) => true
- *    isValueEqualsIndex([2, 1, 0, 4, 5]) => true
- *    isValueEqualsIndex([10, 20, 30, 40, 50]) => false
- */
-function isValueEqualsIndex(arr) {
-  const result = arr.some((value, index) => value === index);
-  return result;
-}
-
-/**
- * Inserts the item into specified array at specified index.
- *
- * @param {array} arr - The input array.
- * @param {any} item - The item to insert.
- * @param {number} index - Specified index.
- *
- * @example
- *    insertItem([ 1, 3, 4, 5 ], 2, 1)  => [ 1, 2, 3, 4, 5 ]
- *    insertItem([ 1, 'b', 'c'], 'x', 0) => [ 'x', 1, 'b', 'c' ]
- */
-function insertItem(arr, item, index) {
-  arr.splice(index, 0, item);
-  return arr;
-}
-
-/**
- * Returns the n first items of the specified array.
- *
- * @param {array} arr - The input array.
- * @param {number} n - Number of items.
- *
- * @example
- *    getHead([ 1, 3, 4, 5 ], 2) => [ 1, 3 ]
- *    getHead([ 'a', 'b', 'c', 'd'], 3) => [ 'a', 'b', 'c' ]
- *    getHead([ 'a', 'b', 'c', 'd'], 0) => []
- */
-function getHead(arr, n) {
-  return arr.slice(0, n);
-}
-
-/**
- * Returns the n last items of the specified array.
- *
- * @param {array} arr - The input array.
- * @param {number} n - Number of items.
- *
- * @example
- *    getTail([ 1, 3, 4, 5 ], 2) => [ 4, 5 ]
- *    getTail([ 'a', 'b', 'c', 'd'], 3) => [ 'b', 'c', 'd' ]
- *    getTail([ 'a', 'b', 'c', 'd'], 0) => []
- */
-function getTail(arr, n) {
-  let res = [];
-  if (n === 0) {
-    return res;
+  if (b > a && b > c) {
+    return b;
   }
-  res = arr.slice(-n);
-  return res;
+  return c;
 }
 
 /**
- * Returns the doubled array - elements of the specified array
- * are repeated twice using original order.
+ * Checks if a queen can capture a king in the next move on an 8x8 chessboard.
+ * See more details at https://en.wikipedia.org/wiki/Queen_(chess)
  *
- * @param {array} arr - The input array.
- * @return {array} - The doubled array.
+ * @typedef {{
+ *  x: number,
+ *  y: number
+ * }} Position
+ * @param {Object} queen - The position of the queen.
+ * @param {Object} king - The position of the king.
+ * @return {boolean} True if the queen can capture the king, false otherwise.
  *
  * @example
- *    doubleArray(['Ace', 10, true])  => ['Ace', 10, true, 'Ace', 10, true]
- *    doubleArray([0, 1, 2, 3, 4, 5]) => [0, 1, 2, 3, 4, 5, 0, 1, 2, 3, 4, 5]
- *    doubleArray([]) => []
+ * {x: 1, y: 1}, {x: 5, y: 5} => true
+ * {x: 2, y: 1}, {x: 2, y: 8} => true
+ * {x: 1, y: 1}, {x: 2, y: 8} => false
+ * {x: 1, y: 1}, {x: 2, y: 8} => false
  */
-function doubleArray(arr) {
-  return arr.concat(arr);
+function canQueenCaptureKing(queen, king) {
+  return (
+    queen.x === king.x ||
+    queen.y === king.y ||
+    Math.abs(queen.x - king.x) === Math.abs(queen.y - king.y)
+  );
 }
 
 /**
- * Concatenates all elements from specified array into single string with ',' delimiter.
+ * Determines whether a triangle is isosceles based on its side lengths.
+ * In this task, the use of methods of the String and Array classes is not allowed.
  *
- * @param {array} arr - The input array.
- * @return {string} - The concatenated string.
+ * @param {number} a - The length of the first side.
+ * @param {number} b - The length of the second side.
+ * @param {number} c - The length of the third side.
+ * @return {boolean} True if the triangle is isosceles, false otherwise.
  *
- * @example
- *    toStringList([0, false, 'cat', NaN, true, '']) => '0,false,cat,NaN,true,'
- *    toStringList([1, 2, 3, 4, 5]) => '1,2,3,4,5'
- *    toStringList(['rock', 'paper', 'scissors']) => 'rock,paper,scissors'
+ * @example:
+ *  1, 2, 3   => false
+ *  3, 1, 2   => false
+ *  2, 3, 2   => true
+ *  3, 2, 2   => true
+ *  2, 2, 3   => true
+ *  2, 2, 5   => false
+ *  3, 0, 3   => false
  */
-function toStringList(arr) {
-  return arr.join();
-}
-
-/**
- * Returns array containing only unique values from the specified array.
- *
- * @param {array} arr - The input array.
- * @return {array} - The array with unique values.
- *
- * @example
- *   distinct([ 1, 2, 3, 3, 2, 1 ]) => [ 1, 2, 3 ]
- *   distinct([ 'a', 'a', 'a', 'a' ])  => [ 'a' ]
- *   distinct([ 1, 1, 2, 2, 3, 3, 4, 4]) => [ 1, 2, 3, 4]
- *   distinct([]) => []
- */
-function distinct(arr) {
-  return [...new Set(arr)];
-}
-
-/**
- * Creates an n-dimensional array and fills it with zeros.
- *
- * @param {number} n - Depth of outter array (n > 0).
- * @param {number} size - Length of all arrays (size > 0).
- * @return {array} - The n-dimensional array filled with zeros.
- *
- * @example
- *    createNDimensionalArray(2, 3) => [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
- *    createNDimensionalArray(3, 2) => [[[0, 0], [0, 0]], [[0, 0], [0, 0]]]
- *    createNDimensionalArray(4, 2) => [[[[0, 0], [0, 0]], [[0, 0], [0, 0]]], [[[0, 0], [0, 0]], [[0, 0], [0, 0]]]]
- *    createNDimensionalArray(1, 1) => [0]
- */
-function createNDimensionalArray(n, size) {
-  if (n === 1) {
-    return Array(size).fill(0);
+function isIsoscelesTriangle(a, b, c) {
+  if (a <= 0 || b <= 0 || c <= 0) {
+    return false;
   }
-  return Array(size).fill(createNDimensionalArray(n - 1, size));
-}
-/**
- * Flattens a nested array into a single-level array.
- *
- * @param {array} nestedArray - The nested array to be flattened.
- * @return {array} - A single-level array.
- *
- * @example
- *    flattenArray([1, [2, [3, 4], 5], 6]) => [1, 2, 3, 4, 5, 6]
- *    flattenArray(['a', ['b', ['c', 'd'], 'e'], 'f']) => ['a', 'b', 'c', 'd', 'e', 'f']
- *    flattenArray([1, 2, 3, 4]) => [1, 2, 3, 4]
- */
-function flattenArray(nestedArray) {
-  return nestedArray.flat(Infinity);
+  if (a + b < c) {
+    return false;
+  }
+  return a === b || b === c || c === a;
 }
 
 /**
- * Projects each element of the specified array to a sequence
- * and flattens the resulting sequences into one array.
+ * Converts a number to Roman numerals. The number will be between 1 and 39.
+ * In this task, the use of methods of the String and Array classes is not allowed.
  *
- * @param {array} arr - The input array
- * @param {Function} childrenSelector - A transform function to apply to each element
- *                                     that returns an array of children
- * @return {array} - The flatted array
+ * @param {number} num - The number to convert.
+ * @return {string} The Roman numeral representation of the number.
  *
- * @example
- *   selectMany([[1, 2], [3, 4], [5, 6]], (x) => x) =>   [ 1, 2, 3, 4, 5, 6 ]
- *   selectMany(['one','two','three'], (x) => x.split('')) =>   ['o','n','e','t','w','o','t','h','r','e','e']
+ * @example:
+ *  1   => I
+ *  2   => II
+ *  5   => V
+ *  10  => X
+ *  26  => XXVI
  */
-function selectMany(arr, childrenSelector) {
-  const res = arr.flatMap((el) => childrenSelector(el));
-  return res;
+function convertToRomanNumerals(num) {
+  const romanNumerals = [
+    ['', 'I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX'],
+    ['', 'X', 'XX', 'XXX'],
+    ['', 'XL', 'L'],
+  ];
+
+  const units = num % 10;
+  const tens = Math.floor(num / 10);
+
+  return romanNumerals[1][tens] + romanNumerals[0][units];
 }
 
 /**
- * Every month, you record your income and expenses.
- * Expenses may be greater than income.
- * You need to calculate the final balance.
+ * Converts a number to a string, replacing digits with words.
+ * In this task, the use of methods of the String and Array classes is not allowed.
  *
- * @param {array} arr - The input array [[income, expence], ...]
- * @return {number} - The final balance.
+ * @param {string} numberStr - The number as a string.
+ * @return {string} The number with digits replaced by words.
  *
- * @example
- *   calculateBalance([ [ 10, 8 ], [ 5, 1 ] ]) => (10 - 8) + (5 - 1) = 2 + 4 = 6
- *   calculateBalance([ [ 10, 8 ], [ 1, 5 ] ])  => (10 - 8) + (1 - 5) = 2 + -4 = -2
- *   calculateBalance([]) => 0
+ * @example:
+ *  '1'       => 'one'
+ *  '10'      => 'one zero'
+ *  '-10'     => 'minus one zero'
+ *  '10.5'    => 'one zero point five'
+ *  '10,5'    => 'one zero point five'
+ *  '1950.2'  => 'one nine five zero point two'
  */
-function calculateBalance(arr) {
-  return arr.reduce(
-    (balance, [income, expense]) => balance + income - expense,
-    0
-  );
-}
-/**
- * Breaks an array into chunks of the specified size.
- *
- * @param {array} arr - The array to be broken into chunks.
- * @param {number} chunkSize - The size of each chunk.
- * @return {array} - An array of chunks.
- *
- * @example
- *    createChunks([1, 2, 3, 4, 5, 6, 7], 3) => [[1, 2, 3], [4, 5, 6], [7]]
- *    createChunks(['a', 'b', 'c', 'd', 'e'], 2) => [['a', 'b'], ['c', 'd'], ['e']]
- *    createChunks([10, 20, 30, 40, 50], 1) => [[10], [20], [30], [40], [50]]
- */
-function createChunks(arr, chunkSize) {
-  return Array.from({ length: Math.ceil(arr.length / chunkSize) }, (_, index) =>
-    arr.slice(index * chunkSize, (index + 1) * chunkSize)
-  );
-}
-/**
- * Generates an array of odd numbers of the specified length.
- *
- * @param {number} len - The length of an array.
- * @return {array} - An array of odd numbers.
- *
- * @example
- *    generateOdds(0) => []
- *    generateOdds(1) => [ 1 ]
- *    generateOdds(2) => [ 1, 3 ]
- *    generateOdds(5) => [ 1, 3, 5, 7, 9 ]
- *    optional solutions https://www.freecodecamp.org/news/javascript-range-create-an-array-of-numbers-with-the-from-method/
- */
-function generateOdds(len) {
-  return Array.from({ length: len }, (_, ind) => 2 * ind + 1);
-}
+function convertNumberToString(numberStr) {
+  const tempNumStr = numberStr;
+  let result = '';
 
-/**
- * Returns an element from the multidimensional array by the specified indices.
- *
- * @param {array} arr - The input multidimensional array
- * @param {array} indices - The array of indices
- * @return {any} - An element from the array
- *
- * @example
- *   getElementByIndices([[1, 2], [3, 4], [5, 6]], [0,0]) => 1        (arr[0][0])
- *   getElementByIndices(['one','two','three'], [2]) => 'three'  (arr[2])
- *   getElementByIndices([[[ 1, 2, 3]]], [ 0, 0, 1 ]) => 2        (arr[0][0][1])
- */
-function getElementByIndices(arr, indices) {
-  return indices.reduce(
-    (result, index) => (result !== undefined ? result[index] : undefined),
-    arr
-  );
-}
-
-/**
- * Returns the number of all falsy values in the specified array.
- *
- * @param {array} arr - The input array.
- * @return {number} - The number of all falsy values.
- *
- * @example
- *  getFalsyValuesCount([]) => 0
- *  getFalsyValuesCount([ 1, '', 3 ]) => 1
- *  getFalsyValuesCount([ -1, 'false', null, 0 ]) => 2
- *  getFalsyValuesCount([ null, undefined, NaN, false, 0, '' ]) => 6
- */
-function getFalsyValuesCount(arr) {
-  return arr.filter((value) => !value).length;
-}
-
-/**
- * Creates an identity matrix of the specified size.
- *
- * @param {number} n - A size of the matrix.
- * @return {array} - An identity matrix.
- *
- * @example
- *     getIdentityMatrix(1)  => [[1]]
- *
- *     getIdentityMatrix(2) => [[1,0],
- *                             [0,1]]
- *
- *                              [[1,0,0,0,0],
- *                              [0,1,0,0,0],
- *     getIdentityMatrix(5) =>  [0,0,1,0,0],
- *                              [0,0,0,1,0],
- *                              [0,0,0,0,1]]
- */
-function getIdentityMatrix(n) {
-  return Array.from({ length: n }, (_, i) =>
-    Array.from({ length: n }, (__, j) => (i === j ? 1 : 0))
-  );
-}
-
-/**
- * Returns an array containing indices of odd elements in the input array.
- *
- * @param {array} numbers - The array of numbers.
- * @return {array} - An array containing indices of odd elements.
- *
- * @example
- *    getIndicesOfOddNumbers([1, 2, 3, 4, 5]) => [0, 2, 4]
- *    getIndicesOfOddNumbers([2, 4, 6, 8, 10]) => []
- *    getIndicesOfOddNumbers([11, 22, 33, 44, 55]) => [0, 2, 4]
- */
-function getIndicesOfOddNumbers(numbers) {
-  return numbers
-    .map((num, index) => (num % 2 !== 0 ? index : -1))
-    .filter((index) => index !== -1);
-}
-/**
- * Returns the array of RGB Hex strings from the specified array of numbers.
- *
- * @param {array} arr - The input array.
- * @return {array} - The array of RGB Hex strings.
- *
- * @example
- *    getHexRGBValues([ 0, 255, 16777215]) => [ '#000000', '#0000FF', '#FFFFFF' ]
- *    getHexRGBValues([]) => []
- */
-function getHexRGBValues(arr) {
-  return arr.map(
-    (num) => `#${num.toString(16).padStart(6, '0').toUpperCase()}`
-  );
-}
-
-/**
- * Returns the n largest values from the specified array
- *
- * @param {array} arr - The input array
- * @param {number} n - Number of maximum values.
- * @return {array} - n largest values.
- *
- * @example
- *   getMaxItems([], 5) => []
- *   getMaxItems([ 1, 2 ], 1) => [ 2]
- *   getMaxItems([ 2, 3, 1 ], 2) => [ 3, 2]
- *   getMaxItems([ 10, 2, 7, 5, 3, -5 ], 3) => [ 10, 7, 5 ]
- *   getMaxItems([ 10, 10, 10, 10 ], 3) => [ 10, 10, 10 ]
- */
-function getMaxItems(arr, n) {
-  return arr.sort((a, b) => b - a).slice(0, n);
-}
-
-/**
- * Finds and returns an array containing only the common elements found in two arrays.
- *
- * @param {array} arr1 - The first array.
- * @param {array} arr2 - The second array.
- * @return {array} - An array containing common elements.
- *
- * @example
- *    findCommonElements([1, 2, 3], [2, 3, 4]) => [ 2, 3 ]
- *    findCommonElements(['a', 'b', 'c'], ['b', 'c', 'd']) => [ 'b', 'c' ]
- *    findCommonElements([1, 2, 3], ['a', 'b', 'c']) => []
- */
-function findCommonElements(arr1, arr2) {
-  return arr1.filter((x) => arr2.includes(x));
-}
-
-/**
- * Finds the length of the longest increasing subsequence of a given array of integers.
- *
- * @param {array} nums - The array of integers.
- * @return {number} - The length of the longest increasing subsequence.
- *
- * @example
- *    findLongestIncreasingSubsequence([10, 22, 9, 33, 21, 50, 41, 60, 80]) => 3
- *    findLongestIncreasingSubsequence([3, 10, 2, 1, 20]) => 2
- *    findLongestIncreasingSubsequence([50, 3, 10, 7, 40, 80]) => 3
- */
-function findLongestIncreasingSubsequence(nums) {
-  let res = 0;
-  nums.reduce((compl, value, index, tempArr) => {
-    if (tempArr[index + 1] > value) {
-      return compl + 1;
+  for (let i = 0; i < tempNumStr.length; i += 1) {
+    const digitChar = tempNumStr[i];
+    switch (digitChar) {
+      case '-':
+        result += 'minus';
+        break;
+      case '0':
+        result += 'zero';
+        break;
+      case '1':
+        result += 'one';
+        break;
+      case '2':
+        result += 'two';
+        break;
+      case '3':
+        result += 'three';
+        break;
+      case '4':
+        result += 'four';
+        break;
+      case '5':
+        result += 'five';
+        break;
+      case '6':
+        result += 'six';
+        break;
+      case '7':
+        result += 'seven';
+        break;
+      case '8':
+        result += 'eight';
+        break;
+      case '9':
+        result += 'nine';
+        break;
+      case '.':
+      case ',':
+        result += 'point';
+        break;
+      default:
+        break;
     }
-    res = Math.max(res, compl);
-    return 1;
-  }, 1);
-  return res;
+    if (i !== numberStr.length - 1) {
+      result += ' ';
+    }
+  }
+  return result;
+}
+/**
+ * Determines whether a string is a palindrome.
+ * In this task, the use of methods of the String and Array classes is not allowed.
+ *
+ * @param {string} str - The string to check.
+ * @return {boolean} True if the string is a palindrome, false otherwise.
+ *
+ * @example:
+ *  'abcba'     => true
+ *  '0123210'   => true
+ *  'qweqwe'    => false
+ */
+function isPalindrome(str) {
+  for (let i = 0; i < str.length; i += 1) {
+    const j = str.length - 1 - i;
+    if (i >= j) {
+      return true;
+    }
+    if (str[i] !== str[j]) {
+      return false;
+    }
+  }
+  return true;
+}
+/**
+ * Finds the first occurrence of a letter in a string.
+ * In this task, the use of methods of the String and Array classes is not allowed.
+ *
+ * @param {string} str - The string to search.
+ * @param {string} letter - The letter to find.
+ * @return {number} The index of the first occurrence of the letter, or -1 if not found.
+ *
+ * @example:
+ *  'qwerty', 'q'     => 0
+ *  'qwerty', 'е'     => 4
+ *  'qwerty', 'Q'     => -1
+ *  'qwerty', 'p'     => -1
+ */
+function getIndexOf(str, letter) {
+  let result = -1;
+  let i = 0;
+  while (i < str.length - 1) {
+    if (str[i] !== letter) i += 1;
+    else {
+      result = i;
+      break;
+    }
+  }
+  return result;
 }
 
 /**
- * Propagates every item in sequence its position times
- * Returns an array that consists of: one first item, two second items, three third items etc.
+ * Checks if a number contains a specific digit.
+ * In this task, the use of methods of the String and Array classes is not allowed.
  *
- * @param {array} arr - The input array
- * @return {array}
+ * @param {number} num - The number to check.
+ * @param {number} digit - The digit to search for.
+ * @return {boolean} True if the number contains the digit, false otherwise.
  *
- * @example :
- *  propagateItemsByPositionIndex([]) => []
- *  propagateItemsByPositionIndex([ 1 ]) => [ 1 ]
- *  propagateItemsByPositionIndex([ 'a', 'b' ]) => [ 'a', 'b','b' ]
- *  propagateItemsByPositionIndex([ 'a', 'b', 'c', null ]) => [ 'a', 'b', 'b', 'c', 'c', 'c',  null, null, null, null ]
- *  propagateItemsByPositionIndex([ 1,2,3,4,5 ]) => [ 1, 2, 2, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 5 ]
+ * @example:
+ *  123450, 5   => true
+ *  123450, 1   => true
+ *  123450, 0   => true
+ *  12345, 0    => false
+ *  12345, 6    => false
  */
-function propagateItemsByPositionIndex(arr) {
-  return arr.flatMap((item, index) =>
-    Array.from({ length: index + 1 }, () => item)
-  );
+function isContainNumber(num, digit) {
+  let tempNum = Math.abs(num);
+  while (tempNum > 0) {
+    const currentDigit = tempNum % 10;
+    if (currentDigit === digit) {
+      return true;
+    }
+    tempNum = Math.floor(tempNum / 10);
+  }
+  return false;
+}
+/**
+ * Finds the index of an element in an array where the sum of elements to the left equals the sum of elements to the right.
+ * If such an index does not return -1.
+ * In this task, the use of methods of the Array and String classes is not allowed.
+ *
+ * @param {number[]} arr - The array to check.
+ * @return {number} The index of the balance point, or -1 if none exists.
+ *
+ * @example:
+ *  [1, 2, 5, 3, 0] => 2    => 1 + 2 === 3 + 0 then balance element is 5 and its index = 2
+ *  [2, 3, 9, 5] => 2       => 2 + 3 === 5 then balance element is 9 and its index = 2
+ *  [1, 2, 3, 4, 5] => -1   => no balance element
+ */
+function getBalanceIndex(arr) {
+  let leftSum = 0;
+  let rightSum = 0;
+
+  for (let i = 1; i < arr.length; i += 1) {
+    rightSum += arr[i];
+  }
+  for (let i = 0; i < arr.length; i += 1) {
+    if (leftSum === rightSum) {
+      return i;
+    }
+    leftSum += arr[i];
+    rightSum -= arr[i + 1];
+  }
+  return -1;
+}
+/**
+ * Generates a spiral matrix of a given size, filled with numbers in ascending order starting from one.
+ * The direction of filling with numbers is clockwise.
+ * Usage of String and Array classes methods is not allowed in this task.
+ *
+ * @param {number} size - The size of the matrix.
+ * @return {number[][]} The spiral matrix.
+ *
+ * @example:
+ *        [
+ *          [1, 2, 3],
+ *  3  =>   [8, 9, 4],
+ *          [7, 6, 5]
+ *        ]
+ *        [
+ *          [1,  2,  3,  4],
+ *  4  =>   [12, 13, 14, 5],
+ *          [11, 16, 15, 6],
+ *          [10, 9,  8,  7]
+ *        ]
+ */
+function getSpiralMatrix(size) {
+  const matrix = [];
+  for (let i = 0; i < size; i += 1) {
+    matrix[i] = [];
+  }
+
+  let current = 1;
+  let top = 0;
+  let bottom = size - 1;
+  let left = 0;
+  let right = size - 1;
+
+  while (top <= bottom && left <= right) {
+    for (let i = left; i <= right; i += 1) {
+      matrix[top][i] = current;
+      current += 1;
+    }
+    top += 1;
+    for (let i = top; i <= bottom; i += 1) {
+      matrix[i][right] = current;
+      current += 1;
+    }
+    right -= 1;
+    if (top <= bottom) {
+      for (let i = right; i >= left; i -= 1) {
+        matrix[bottom][i] = current;
+        current += 1;
+      }
+      bottom -= 1;
+    }
+    if (left <= right) {
+      for (let i = bottom; i >= top; i -= 1) {
+        matrix[i][left] = current;
+        current += 1;
+      }
+      left += 1;
+    }
+  }
+  return matrix;
+}
+/**
+ * Rotates a matrix by 90 degrees clockwise in place.
+ * Take into account that the matrix size can be very large. Consider how you can optimize your solution.
+ * Usage of String and Array class methods is not allowed in this task.
+ *
+ * @param {number[][]} matrix - The matrix to rotate.
+ * @return {number[][]} The rotated matrix.
+ *
+ * @example:
+ *  [                 [
+ *    [1, 2, 3],        [7, 4, 1],
+ *    [4, 5, 6],  =>    [8, 5, 2],
+ *    [7, 8, 9]         [9, 6, 3]
+ *  ]                 ]
+ */
+function rotateMatrix(matrix) {
+  const n = matrix.length;
+  const tempMatrix = matrix;
+
+  for (let i = 0; i < Math.floor(n / 2); i += 1) {
+    for (let j = i; j < n - i - 1; j += 1) {
+      const temp = tempMatrix[i][j];
+      tempMatrix[i][j] = matrix[n - 1 - j][i];
+      tempMatrix[n - 1 - j][i] = matrix[n - 1 - i][n - 1 - j];
+      tempMatrix[n - 1 - i][n - 1 - j] = matrix[j][n - 1 - i];
+      tempMatrix[j][n - 1 - i] = temp;
+    }
+  }
+  return tempMatrix;
+}
+/**
+ * Sorts an array of numbers in ascending order in place.
+ * Employ any sorting algorithm of your choice.
+ * Take into account that the array can be very large. Consider how you can optimize your solution.
+ * In this task, the use of methods of the Array and String classes is not allowed.
+ *
+ * @param {number[]} arr - The array to sort.
+ * @return {number[]} The sorted array.
+ *
+ * @example:
+ *  [2, 9, 5]       => [2, 5, 9]
+ *  [2, 9, 5, 9]    => [2, 5, 9, 9]
+ *  [-2, 9, 5, -3]  => [-3, -2, 5, 9]
+ */
+
+function insertSort(arr, n) {
+  const tempArr = arr;
+  let i;
+  let key;
+  let j;
+  for (i = 1; i < n; i += 1) {
+    key = tempArr[i];
+    j = i - 1;
+    while (j >= 0 && tempArr[j] > key) {
+      tempArr[j + 1] = tempArr[j];
+      j -= 1;
+    }
+    tempArr[j + 1] = key;
+  }
 }
 
-/**
- * Shifts an array by n positions. If n is negative, the array is shifted to the left;
- * if positive, it is shifted to the right.
- *
- * @param {array} arr - The array to be shifted.
- * @param {number} n - The number of positions to shift the array elements.
- * @return {array} - The shifted array.
- *
- * @example
- *    shiftArray([1, 2, 3, 4, 5], 2) => [4, 5, 1, 2, 3]
- *    shiftArray(['a', 'b', 'c', 'd'], -1) => ['b', 'c', 'd', 'a']
- *    shiftArray([10, 20, 30, 40, 50], -3) => [40, 50, 10, 20, 30]
- */
-function shiftArray(arr, n) {
-  const shift = n % arr.length;
-  if (shift === 0) {
-    return arr;
-  }
-  if (shift > 0) {
-    const shifted = arr.slice(-shift);
-    return shifted.concat(arr.slice(0, arr.length - shift));
-  }
-  const shifted = arr.slice(0, -shift);
-  return arr.slice(-shift).concat(shifted);
+function sortByAsc(arr) {
+  const n = arr.length;
+  insertSort(arr, n);
 }
 /**
- * Sorts digit names.
+ * Shuffles characters in a string so that the characters with an odd index are moved to the end of the string at each iteration.
+ * Take into account that the string can be very long and the number of iterations is large. Consider how you can optimize your solution.
+ * Usage of Array class methods is not allowed in this task.
  *
- * @param {array} arr - The input array.
- * @return {array} - Sorted array.
+ * @param {string} str - The string to shuffle.
+ * @param {number} iterations - The number of iterations to perform the shuffle.
+ * @return {string} The shuffled string.
  *
- * @example
- *   sortDigitNamesByNumericOrder([]) => []
- *   sortDigitNamesByNumericOrder([ 'nine','one' ]) => [ 'one', 'nine' ]
- *   sortDigitNamesByNumericOrder([ 'one','two','three' ]) => [ 'one','two', 'three' ]
- *   sortDigitNamesByNumericOrder([ 'nine','eight','nine','eight' ]) => [ 'eight','eight','nine','nine']
- *   sortDigitNamesByNumericOrder([ 'one','one','one','zero' ]) => [ 'zero','one','one','one' ]
+ * @example:
+ *  '012345', 1 => '024135'
+ *  'qwerty', 1 => 'qetwry'
+ *  '012345', 2 => '024135' => '043215'
+ *  'qwerty', 2 => 'qetwry' => 'qtrewy'
+ *  '012345', 3 => '024135' => '043215' => '031425'
+ *  'qwerty', 3 => 'qetwry' => 'qtrewy' => 'qrwtey'
  */
-function sortDigitNamesByNumericOrder(arr) {
-  const digitVal = {
-    zero: 0,
-    one: 1,
-    two: 2,
-    three: 3,
-    four: 4,
-    five: 5,
-    six: 6,
-    seven: 7,
-    eight: 8,
-    nine: 9,
-  };
-  return arr.sort((a, b) => digitVal[a] - digitVal[b]);
+
+function shuffleChar(str, totalIterations) {
+  if (str.length === 0 || totalIterations <= 0) {
+    return str;
+  }
+
+  function shuffleOdd(inputStr, iter) {
+    let copyStr = inputStr;
+
+    for (let i = 0; i < iter; i += 1) {
+      let oddCharacters = '';
+      let evenCharacters = '';
+
+      for (let j = 0; j < copyStr.length; j += 1) {
+        if (j % 2 === 0) {
+          evenCharacters += copyStr[j];
+        } else {
+          oddCharacters += copyStr[j];
+        }
+      }
+
+      copyStr = evenCharacters + oddCharacters;
+
+      if (copyStr === inputStr) {
+        return shuffleChar(inputStr, iter % (i + 1));
+      }
+    }
+
+    return copyStr;
+  }
+
+  return shuffleOdd(str, totalIterations);
+}
+/**
+ * Returns the nearest largest integer consisting of the digits of the given positive integer.
+ * If there is no such number, it returns the original number.
+ * Usage of String class methods is not allowed in this task.
+ *
+ * @example:
+ * 12345    => 12354
+ * 123450   => 123504
+ * 12344    => 12434
+ * 123440   => 124034
+ * 1203450  => 1203504
+ * 90822    => 92028
+ * 321321   => 322113
+ *
+ * @param {number} number The source number
+ * @returns {number} The nearest larger number, or original number if none exists.
+ */
+
+function getNearestBigger(number) {
+  const digits = [];
+  let num = number;
+  while (num > 0) {
+    digits.unshift(num % 10);
+    num = Math.floor(num / 10);
+  }
+
+  let i = digits.length - 1;
+  while (i > 0 && digits[i - 1] >= digits[i]) {
+    i -= 1;
+  }
+
+  if (i <= 0) {
+    return null;
+  }
+
+  let j = digits.length - 1;
+  while (digits[j] <= digits[i - 1]) {
+    j -= 1;
+  }
+  const temp = digits[i - 1];
+  digits[i - 1] = digits[j];
+  digits[j] = temp;
+  let left = i;
+  let right = digits.length - 1;
+  while (left < right) {
+    const temp2 = digits[left];
+    digits[left] = digits[right];
+    digits[right] = temp2;
+    left += 1;
+    right -= 1;
+  }
+  let result = 0;
+  for (let k = 0; k < digits.length; k += 1) {
+    result = result * 10 + digits[k];
+  }
+
+  return result <= number ? null : result;
 }
 
-/**
- * Swaps the head and tail of the specified array:
- * the head (first half) of array move to the end, the tail (last half) move to the start.
- * The middle element (if exists) leave on the same position. *
- *
- * @param {array} arr - The input array.
- * @return {array} - The swapped array.
- *
- * @example
- *   [ 1, 2, 3, 4, 5 ]   =>  [ 4, 5, 3, 1, 2 ]
- *    \----/   \----/
- *     head     tail
- *
- *   swapHeadAndTail([ 1, 2 ]) => [ 2, 1 ]
- *   swapHeadAndTail([ 1, 2, 3, 4, 5, 6, 7, 8 ]) =>  [ 5, 6, 7, 8, 1, 2, 3, 4 ]
- *   swapHeadAndTail([ 1 ]) => [ 1 ]
- *   swapHeadAndTail([]) => []
- *
- */
-function swapHeadAndTail(arr) {
-  const { length } = arr;
-  if (length <= 1) {
-    return arr;
-  }
-  const middIndex = Math.floor(length / 2);
-  const head = arr.slice(0, middIndex);
-  const tail = arr.slice(-middIndex);
-  const middleElement = length % 2 === 1 ? [arr[middIndex]] : [];
-  return tail.concat(middleElement, head);
-}
 module.exports = {
-  getIntervalArray,
-  sumArrays,
-  findElement,
-  findAllOccurrences,
-  removeFalsyValues,
-  getStringsLength,
-  getAverage,
-  isSameLength,
-  isValueEqualsIndex,
-  insertItem,
-  getHead,
-  getTail,
-  doubleArray,
-  toStringList,
-  distinct,
-  createNDimensionalArray,
-  flattenArray,
-  selectMany,
-  calculateBalance,
-  createChunks,
-  generateOdds,
-  getElementByIndices,
-  getFalsyValuesCount,
-  getIdentityMatrix,
-  getIndicesOfOddNumbers,
-  getHexRGBValues,
-  getMaxItems,
-  findCommonElements,
-  findLongestIncreasingSubsequence,
-  propagateItemsByPositionIndex,
-  shiftArray,
-  sortDigitNamesByNumericOrder,
-  swapHeadAndTail,
+  isPositive,
+  getMaxNumber,
+  canQueenCaptureKing,
+  isIsoscelesTriangle,
+  convertToRomanNumerals,
+  convertNumberToString,
+  isPalindrome,
+  getIndexOf,
+  isContainNumber,
+  getBalanceIndex,
+  getSpiralMatrix,
+  rotateMatrix,
+  sortByAsc,
+  shuffleChar,
+  getNearestBigger,
 };
